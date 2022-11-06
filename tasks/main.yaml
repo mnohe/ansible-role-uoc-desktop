@@ -1,0 +1,34 @@
+---
+- name: Install desktop environment
+  block:
+    - name: Install LightDM
+      apt:
+        name:
+        - lightdm
+    - name: Configure autologin
+      vars:
+        lightdm_conf_dir: /etc/lightdm/lightdm.conf.d/
+      block:
+        - name: Create target LightDM config directory
+          file:
+            path: "{{ lightdm_conf_dir }}"
+            state: directory
+        - name: Prepare LightDM configuration for autologin
+          ansible.builtin.lineinfile:
+            path: "{{ lightdm_conf_dir }}/autologin.conf"
+            search_string: "[Seat:*]"
+            line: "[Seat:*]"
+            state: present
+            create: yes
+        - name: Configure LightDM to autologin
+          ansible.builtin.lineinfile:
+            path: "{{ lightdm_conf_dir }}/autologin.conf"
+            insertafter: "[Seat:*]"
+            search_string: "autologin-user="
+            line: "autologin-user={{ default_user }}"
+            state: present
+    - name: Install Xfce
+      apt:
+        name:
+        - task-xfce-desktop
+        state: present
