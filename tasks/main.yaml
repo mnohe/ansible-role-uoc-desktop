@@ -1,4 +1,7 @@
 ---
+- fail: msg="Please set the 'uoc_user' variable"
+  when: uoc_user is not defined
+
 - name: Install desktop environment
   block:
     - name: Install LightDM
@@ -13,20 +16,10 @@
           file:
             path: "{{ lightdm_conf_dir }}"
             state: directory
-        - name: Prepare LightDM configuration for autologin
-          ansible.builtin.lineinfile:
-            path: "{{ lightdm_conf_dir }}/autologin.conf"
-            search_string: "[Seat:*]"
-            line: "[Seat:*]"
-            state: present
-            create: yes
         - name: Configure LightDM to autologin
-          ansible.builtin.lineinfile:
-            path: "{{ lightdm_conf_dir }}/autologin.conf"
-            insertafter: "[Seat:*]"
-            search_string: "autologin-user="
-            line: "autologin-user={{ default_user }}"
-            state: present
+          ansible.builtin.template:
+            src: lightdm-autologin.conf.j2
+            dest: "{{ lightdm_conf_dir }}/autologin.conf"
     - name: Install Xfce
       apt:
         name:

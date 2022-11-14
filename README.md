@@ -1,4 +1,4 @@
-# Ansible Role: UOC base
+# Ansible Role: UOC desktop
 
 [![CI](https://github.com/mnohe/ansible-role-uoc-desktop/workflows/CI/badge.svg?event=push)](https://github.com/mnohe/ansible-role-uoc-desktop/actions?query=workflow%3ACI)
 
@@ -12,7 +12,7 @@ The role is meant to be installed on a machine running a Debian distribution.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-- `default_user: uoc` The user name to be created.
+- `uoc_user: uoc` The user name to be created.
 
 ## Dependencies
 

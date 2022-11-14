@@ -1,7 +1,6 @@
 ---
 dependencies:
-# - src: https://github.com/mnohe/ansible-role-uoc-base.git
-  - src: git+file:///home/mn/Documents/GitHub/ansible-role-uoc-base
+  - src: https://github.com/mnohe/ansible-role-uoc-base.git
 
 galaxy_info:
   role_name: uoc_desktop
