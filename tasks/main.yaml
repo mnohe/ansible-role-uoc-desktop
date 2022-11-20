@@ -7,7 +7,7 @@
     - name: Install LightDM
       apt:
         name:
-        - lightdm
+          - lightdm
     - name: Configure autologin
       vars:
         lightdm_conf_dir: /etc/lightdm/lightdm.conf.d/
@@ -23,5 +23,5 @@
     - name: Install Xfce
       apt:
         name:
-        - task-xfce-desktop
+          - task-xfce-desktop
         state: present
